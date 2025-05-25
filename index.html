@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saylani Registration</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="../image/logo.png" alt="Saylani Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#register">Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>Welcome to Saylani</h1>
+            <p>Empowering Lives Through Education and Technology</p>
+            <a href="#register" class="cta-button">Get Started</a>
+        </div>
+    </section>
+
+    <section id="courses" class="courses-section">
+        <div class="container">
+            <h2 class="section-title">Our Courses</h2>
+            <div class="cards-container">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Learn modern web development with HTML, CSS, JavaScript, and more.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Artificial Intelligence</h3>
+                    <p>Master AI concepts, machine learning, and data science.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Development</h3>
+                    <p>Create amazing mobile applications for iOS and Android.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="register" class="register-section">
+        <div class="container">
+            <div class="form-container">
+                <h2>Student Registration</h2>
+                <form id="regForm">
+                    <div class="form-group">
+                        <i class="fas fa-user"></i>
+                        <input name="fullName" placeholder="Full Name" required />
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-id-card"></i>
+                        <input name="cnic" placeholder="CNIC e.g. 12345-1234567-1" required />
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        <input name="email" type="email" placeholder="Email e.g. example@gmail.com" required />
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-phone"></i>
+                        <input name="phone" placeholder="Phone e.g. 03001234567" required />
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-location-dot"></i>
+                        <input name="address" placeholder="Address e.g. 123 Main St, Karachi, Pakistan" required />
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-graduation-cap"></i>
+                        <input name="program" placeholder="Program e.g. Python, AI, Web Development, etc." required />
+                    </div>
+                    <button type="submit">Register Now</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const form = document.getElementById("regForm");
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = Object.fromEntries(new FormData(form));
+            const res = await fetch("http://localhost:3000/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            });
+            const data = await res.json();
+            alert("Registered! Download your ID: " + data.pdf);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings = 
+            {"appId":"129bfbaa89037f64c2692e81c8ed6426a","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
+</body>
+</html>
